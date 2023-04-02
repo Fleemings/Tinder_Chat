@@ -1,0 +1,61 @@
+.auth__modal {
+  position: absolute;
+  top: 7%;
+  left: 30%;
+  max-width: 360px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 2rem;
+  padding: 4rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  border-radius: 3rem;
+  border: 2px solid rgb(121, 119, 119);
+  margin: 0.7rem;
+  color: rgb(121, 119, 119);
+}
+
+.auth__modal .close__icon {
+  float: right;
+}
+
+.auth__modal p {
+  text-transform: none;
+}
+
+.auth__modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__modal input[type='password'],
+.auth__modal input[type='email'] {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border-color: rgba(121, 119, 119, 0.42);
+}
+
+.auth-model__error {
+  color: rgb(255, 0, 0);
+}
+
+/*    Media Queries (Medium Devices)    */
+
+@media screen and (max-width: 1024px) {
+  .auth__modal {
+    top: 26%;
+    left: 23%;
+  }
+}
+
+/*    Media Queries (Mobile Devices)    */
+
+@media screen and (max-width: 600px) {
+  .auth__modal {
+    top: 23%;
+    left: 0;
+  }
+}

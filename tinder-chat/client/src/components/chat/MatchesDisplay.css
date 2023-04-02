@@ -1,0 +1,21 @@
+.matches-display__container {
+  padding: 1.5rem;
+  height: 60vh;
+  overflow-y: auto;
+}
+.match-card__container {
+  display: flex;
+  align-items: center;
+}
+
+.img__container {
+  height: 2rem;
+  width: 3rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin: 0.5rem;
+}
+
+.img__container img {
+  width: 100%;
+}

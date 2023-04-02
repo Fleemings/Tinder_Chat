@@ -1,0 +1,32 @@
+.chat_header__container {
+  background: linear-gradient(
+    47deg,
+    rgb(254, 48, 114),
+    rgb(255, 89, 64)
+  );
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat_header__container .chat_header-profile-pic,
+.chat_header__container .log-out-icon {
+  display: flex;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  padding: 1.5rem;
+}
+
+.image__container {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin: 0.8rem;
+}
+
+.image__container img {
+  width: 100%;
+  height: 100%;
+}

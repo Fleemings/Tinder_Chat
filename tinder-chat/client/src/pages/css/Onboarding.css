@@ -1,0 +1,102 @@
+.onboarding {
+  border-top: 1px solid rgb(154, 154, 154);
+}
+.onboarding form {
+  display: flex;
+  justify-content: center;
+}
+
+.onboarding form section {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  width: 35%;
+  text-align: start;
+}
+
+.onboarding form label {
+  margin: 0.7rem 0;
+}
+
+.onboarding form input {
+  padding: 1.1rem 1.6rem;
+  margin: 0.7rem 0;
+  font-size: 1rem;
+  border: 2px solid rgb(219, 219, 219);
+  border-radius: 0.8rem;
+}
+
+.onboarding form input::-webkit-outer-spin-button,
+.onboarding form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.onboarding form .multiple-input__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.onboarding form .multiple-input__container input {
+  margin-right: 0.7rem;
+}
+
+.onboarding form .multiple-input__container label {
+  padding: 0.8rem 0.4rem;
+  border: 2px solid rgb(144, 144, 144);
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  margin-right: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.onboarding form .multiple-input__container input[type='radio'] {
+  display: none;
+}
+
+.onboarding form input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.onboarding form input[type='radio']:checked + label {
+  border: 2px solid rgb(221, 39, 22);
+}
+
+.onboarding form input[type='submit']:hover,
+.onboarding form input[type='submit']:active {
+  background-color: rgb(226, 115, 115);
+}
+
+.onboarding form input[type='number'] {
+  width: 10%;
+  height: 15%;
+}
+
+.onboarding form .photo__container img {
+  width: 100%;
+}
+
+/*    Media Queries (Medium Devices)    */
+
+@media screen and (max-width: 1024px) {
+  .onboarding form section {
+    width: 40%;
+  }
+
+  .onboarding form input[type='number'] {
+    width: 23%;
+  }
+}
+
+/*    Media Queries (Mobile Devices)    */
+
+@media screen and (max-width: 600px) {
+  .onboarding form {
+    flex-direction: column;
+  }
+
+  .onboarding form section {
+    width: 85%;
+  }
+}

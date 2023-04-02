@@ -1,0 +1,39 @@
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .logo__container {
+  width: 9rem;
+  margin: 1.5rem;
+}
+
+nav .logo__container .logo {
+  width: 100%;
+}
+
+nav .nav__button {
+  color: rgb(254, 48, 114);
+  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+  padding: 20px 20px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+}
+
+nav .nav__button:disabled {
+  background-color: rgb(189, 180, 180);
+  color: rgb(160, 38, 75);
+}
+
+/*    Media Queries (Mobile Devices)    */
+
+@media screen and (max-width: 600px) {
+  nav .logo__container {
+    width: 7.5rem;
+    margin: 1.2rem;
+  }
+}
