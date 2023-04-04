@@ -53,8 +53,9 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       </div>
       <h2>{isSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
       <p>
-        By clicking Log In, you agree to our terms. Learn how we
-        process your data in our Privacy Policy and Cookies Policy
+        By clicking sing up, you agree to our terms. Learn how we
+        process your data in our <strong>Privacy Policy</strong> and{' '}
+        <strong>Cookies Policy</strong>
       </p>
       <form onSubmit={handleSubmit}>
         <input
@@ -83,7 +84,11 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         )}
-        <input className='secondary__button' type='submit' />
+        <input
+          className='secondary__button'
+          type='submit'
+          value='SIGN UP'
+        />
         <p className='auth-model__error'>{error}</p>
       </form>
       <hr />

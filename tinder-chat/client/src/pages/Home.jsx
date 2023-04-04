@@ -4,6 +4,7 @@ import Nav from '../components/navbar/Nav';
 import AuthModal from '../auth/AuthModal';
 import './css/Home.css';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -11,6 +12,7 @@ const Home = () => {
   const [cookies, setCookies, removeCookies] = useCookies(['user']);
 
   const authToken = cookies.AuthToken;
+  let navigate = useNavigate();
 
   const handleClick = () => {
     if (authToken) {
@@ -21,6 +23,12 @@ const Home = () => {
     }
     setShowModal(true);
     setIsSignUp(true);
+  };
+
+  const handleDahsboard = () => {
+    if (authToken) {
+      navigate('/dashboard');
+    }
   };
   return (
     <div className='overlay'>
@@ -36,6 +44,14 @@ const Home = () => {
         <button className='primary-button' onClick={handleClick}>
           {authToken ? 'Signout' : 'Create Account'}
         </button>
+        {authToken && (
+          <button
+            className='primary-button'
+            onClick={handleDahsboard}
+          >
+            DASHBOARD
+          </button>
+        )}
         {showModal && (
           <AuthModal
             setShowModal={setShowModal}

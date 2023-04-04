@@ -66,8 +66,6 @@ const Dashboard = () => {
     }
   };
 
-  console.log(user);
-
   // set last direction and decrease current index
   const swiped = (direction, swipedUserId) => {
     if (direction === 'right') {
@@ -87,8 +85,6 @@ const Dashboard = () => {
   const filteresGenderedUsers = genderedUsers?.filter(
     (genderedUsers) => !matchedUserIds.includes(genderedUsers.user_id)
   );
-
-  console.log('filteredGenderedUsers ', filteresGenderedUsers);
 
   return (
     <>

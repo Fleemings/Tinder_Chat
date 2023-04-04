@@ -31,6 +31,7 @@ h2 {
   padding: 1rem 1.5rem;
   border-radius: 1.4rem;
   border: none;
+  margin: 0.3rem;
 }
 
 .primary-button:hover {

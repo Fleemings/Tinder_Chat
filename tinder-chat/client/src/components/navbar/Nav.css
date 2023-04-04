@@ -17,11 +17,11 @@ nav .logo__container .logo {
 nav .nav__button {
   color: rgb(254, 48, 114);
   background-color: rgb(255, 255, 255);
-  font-size: 20px;
-  padding: 20px 20px;
-  border-radius: 10px;
+  font-size: 1rem;
+  padding: 1rem 1rem;
+  border-radius: 0.8rem;
   border: none;
-  margin: 10px;
+  margin: 0.8rem;
 }
 
 nav .nav__button:disabled {

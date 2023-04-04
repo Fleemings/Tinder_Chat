@@ -1,6 +1,7 @@
 .dashboard {
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .dashboard .swiper__container {

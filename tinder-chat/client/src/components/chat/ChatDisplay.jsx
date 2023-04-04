@@ -16,7 +16,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
   const getMessages = async () => {
     try {
       const response = await axios.get(
-        'http://localhost/8080/messages',
+        'http://localhost:8080/messages',
         {
           params: {
             userId: userId,
@@ -24,10 +24,9 @@ const ChatDisplay = ({ user, clickedUser }) => {
           },
         }
       );
-
       setUsersMessages(response.data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -77,9 +76,8 @@ const ChatDisplay = ({ user, clickedUser }) => {
     a.timestamp.localeCompare(b.timestamp)
   );
 
-  console.log(descendingOrderMessages);
-  console.log(messages);
-
+  console.log('messages ' + messages);
+  console.log('UserMessages ' + usersMessages);
   return (
     <>
       <Chat descendingOrderMessages={descendingOrderMessages} />

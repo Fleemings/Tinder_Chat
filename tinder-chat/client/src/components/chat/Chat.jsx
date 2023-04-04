@@ -13,9 +13,9 @@ const Chat = ({ descendingOrderMessages }) => {
                 alt={message.first_name + 'profile'}
               />
             </div>
-            <p>{message.name}</p>
+            <p> {message.name}: </p>
+            <p> {message.message}</p>
           </div>
-          <p>{message.message}</p>
         </div>
       ))}
     </div>

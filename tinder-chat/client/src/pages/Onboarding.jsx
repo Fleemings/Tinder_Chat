@@ -52,6 +52,12 @@ const Onboarding = () => {
     }));
   };
 
+  const handleBackLogin = () => {
+    removeCookies('UserId', cookies.UserId);
+    removeCookies('AuthToken', cookies.AuthToken);
+    navigate('/');
+  };
+
   return (
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
@@ -142,14 +148,16 @@ const Onboarding = () => {
               />
               <label htmlFor='other-gender-identity'>Other</label>
             </div>
-            <label htmlFor='show-gender'>Show my gender</label>
-            <input
-              type='checkbox'
-              name='show_gender'
-              id='show-gender'
-              onChange={handleChange}
-              checked={formData.show_gender}
-            />
+            <div className='checkbox'>
+              <input
+                type='checkbox'
+                name='show_gender'
+                id='show-gender'
+                onChange={handleChange}
+                checked={formData.show_gender}
+              />
+              <label htmlFor='show-gender'>Show my gender</label>
+            </div>
 
             <label htmlFor='show-me'>Show me</label>
             <div className='multiple-input__container'>
@@ -211,6 +219,12 @@ const Onboarding = () => {
             </div>
           </section>
         </form>
+        <button
+          className='secondary__button'
+          onClick={handleBackLogin}
+        >
+          If you have an account. Login
+        </button>
       </div>
     </>
   );
