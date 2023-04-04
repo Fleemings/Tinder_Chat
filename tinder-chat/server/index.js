@@ -217,8 +217,11 @@ app.get('/users', async (req, res) => {
 });
 
 app.get('/messages', async (req, res) => {
-  const { userId, correspondingUserId } = req.query;
   const client = new MongoClient(uri);
+
+  const userId = req.query.userId;
+  const correspondingUserId = req.query.correspondingUserId;
+  console.log(userId, correspondingUserId);
 
   try {
     await client.connect();
