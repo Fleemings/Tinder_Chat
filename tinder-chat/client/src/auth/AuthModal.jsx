@@ -29,7 +29,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       }
 
       const response = await axios.post(
-        `http://localhost:8080/${isSignUp ? 'signup' : 'login'}`,
+        `http://35.180.109.170:8080/${isSignUp ? 'signup' : 'login'}`,
         { email, password }
       );
 
