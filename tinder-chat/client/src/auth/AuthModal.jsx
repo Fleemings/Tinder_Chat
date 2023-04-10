@@ -29,7 +29,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       }
 
       const response = await axios.post(
-        `http://tinderchat.fleemings.pt/${
+        `https://tinderchat.fleemings.pt/${
           isSignUp ? 'signup' : 'login'
         }`,
         { email, password }
