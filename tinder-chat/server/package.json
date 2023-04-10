@@ -10,11 +10,14 @@
         "url": "http://localhost:8080"
     }
 ],
+"script": {
+  "start_dev": "pm2 start ecosystem.config.js --env development",
+  "start_prod": "pm2 start ecosystem.config.js --env production"
+},
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:backend": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:backend": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

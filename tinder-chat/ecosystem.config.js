@@ -4,7 +4,6 @@ module.exports = {
       name: 'tinder-chat',
       script: './index.js',
       instances: 1,
-      max_memory_restart: '300M',
 
       // Env Specific Config
       env_production: {
