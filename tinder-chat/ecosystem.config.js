@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'tinder-chat',
-      script: './index.js',
+      script: './server/index.js',
       instances: 1,
 
       // Env Specific Config
