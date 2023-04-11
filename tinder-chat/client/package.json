@@ -1,7 +1,7 @@
 {
   "name": "tinder-chat",
   "version": "0.1.0",
-  "homepage": "http://tinderchat.fleemings.pt",
+  "homepage": "https://tinderchat.fleemings.pt",
   "private": true,
   "dependencies": {
     "@react-spring/web": "^9.5.5",
