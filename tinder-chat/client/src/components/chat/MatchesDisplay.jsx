@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './MatchesDisplay.css';
-import axios from 'axios';
+import { Axios } from '../../config/index';
 import { useCookies } from 'react-cookie';
 
 const MatchesDisplay = ({ matches, setClickedUser }) => {
@@ -10,16 +10,11 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
 
   const matchedUserIds = matches.map(({ user_id }) => user_id);
 
-  const userId = cookies.UserId;
-
   const getMatches = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/users',
-        {
-          params: { userIds: JSON.stringify(matchedUserIds) },
-        }
-      );
+      const response = await Axios.get('/api/users', {
+        params: { userIds: JSON.stringify(matchedUserIds) },
+      });
 
       setMatchesProfile(response.data);
     } catch (error) {
@@ -31,13 +26,6 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
     getMatches();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matches]);
-
-  const filteredMatchedProfile = matchesProfile?.filter(
-    (matchProfile) =>
-      matchProfile.matches.filter(
-        (profile) => profile.user_id === userId
-      ).length > 0
-  );
 
   return (
     <div className='matches-display__container'>

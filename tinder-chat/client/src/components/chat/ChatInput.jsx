@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ChatInput.css';
-import axios from 'axios';
+import { Axios } from '../../config/index';
 
 const ChatInput = ({
   user,
@@ -21,7 +21,7 @@ const ChatInput = ({
     };
 
     try {
-      await axios.post('http://localhost:8080/message', { message });
+      await Axios.post('/api/message', { message });
       getMessages();
       getClickedUsersMessages();
       setTextArea('');

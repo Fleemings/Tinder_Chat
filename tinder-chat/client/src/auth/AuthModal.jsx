@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './AuthModal.css';
 import axios from 'axios';
+import { Axios } from '../config/index';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { IoClose } from 'react-icons/io5';
@@ -28,10 +29,8 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         return;
       }
 
-      const response = await axios.post(
-        `https://tinderchat.fleemings.pt/${
-          isSignUp ? 'signup' : 'login'
-        }`,
+      const response = await Axios.post(
+        `${isSignUp ? 'signup' : 'login'}`,
         { email, password }
       );
 

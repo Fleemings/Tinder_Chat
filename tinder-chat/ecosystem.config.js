@@ -16,12 +16,7 @@ module.exports = {
         PORT: 8080,
         watch: true,
         watch_delay: 3000,
-        ignore_watch: [
-          './node_modules',
-          './public',
-          './package.json',
-          './src',
-        ],
+        ignore_watch: ['./node_modules', './public'],
       },
     },
   ],

@@ -4,21 +4,21 @@ import React, { useState, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import './css/Dashboard.css';
 import ChatContainer from '../components/chat/ChatContainer';
-import axios from 'axios';
+import { Axios } from '../config/index';
 import { useCookies } from 'react-cookie';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [cookies, setCookies, removeCookies] = useCookies(['user']);
   const [genderedUsers, setGenderedUsers] = useState(null);
-
   const [lastDirection, setLastDirection] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   const userId = cookies.UserId;
 
   const getUser = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/user', {
+      const response = await Axios.get('/api/user', {
         params: { userId },
       });
 
@@ -30,14 +30,11 @@ const Dashboard = () => {
 
   const getGenderedUsers = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/gendered-users',
-        {
-          params: {
-            gender: user?.gender_interest,
-          },
-        }
-      );
+      const response = await Axios.get('/api/gendered-users', {
+        params: {
+          gender: user?.gender_interest,
+        },
+      });
       setGenderedUsers(response.data);
     } catch (error) {
       console.error(error);
@@ -46,17 +43,23 @@ const Dashboard = () => {
 
   useEffect(() => {
     getUser();
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
     if (user) {
       getGenderedUsers();
+      setIsLoading(false);
     }
   }, [user]);
 
+  if (isLoading) {
+    return <div>loading..</div>;
+  }
+
   const updateMatches = async (matchedUserId) => {
     try {
-      await axios.put('http://localhost:8080/addmatch', {
+      await Axios.put('/api/addmatch', {
         userId,
         matchedUserId,
       });

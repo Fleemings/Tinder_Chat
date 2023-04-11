@@ -4,7 +4,7 @@ import './css/Onboarding.css';
 import Nav from '../components/navbar/Nav';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Axios } from '../config/index';
 
 const Onboarding = () => {
   const [cookies, setCookies, removeCookies] = useCookies(['user']);
@@ -28,7 +28,7 @@ const Onboarding = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.put('http://localhost:8080/user', {
+      const response = await Axios.put('/api/user', {
         formData,
       });
       const sucess = response.status === 200;
