@@ -23,13 +23,13 @@ app.post('/api/signup', async (req, res) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
   const generateUserId = uuidv4();
-  const hashedPassword = bcrypt.genSalt(10, (err, salt) => {
-    if (err) throw err;
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword =
     // Hash the password using the salt
     bcrypt.hash(password, salt, (err) => {
       if (err) throw err;
+      password = hashedPassword;
     });
-  });
 
   try {
     await client.connect();
@@ -38,6 +38,7 @@ app.post('/api/signup', async (req, res) => {
     const users = database.collection('users');
 
     const existingUser = await users.findOne({ email });
+    const sanitizedEmail = email.toLowerCase();
 
     if (existingUser) {
       return res
@@ -46,8 +47,6 @@ app.post('/api/signup', async (req, res) => {
     } else if (password.length < 6) {
       return res.status(400).send('Password less than 6 characters');
     }
-
-    const sanitizedEmail = email.toLowerCase();
 
     const data = {
       user_id: generateUserId,
