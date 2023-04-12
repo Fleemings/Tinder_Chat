@@ -23,20 +23,12 @@ app.post('/api/signup', async (req, res) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
   const generateUserId = uuidv4();
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword =
-    // Hash the password using the salt
-    bcrypt.hash(password, salt, (err) => {
-      if (err) throw err;
-      password = hashedPassword;
-    });
 
   try {
     await client.connect();
 
     const database = client.db('app-data');
     const users = database.collection('users');
-
     const existingUser = await users.findOne({ email });
     const sanitizedEmail = email.toLowerCase();
 
@@ -48,15 +40,26 @@ app.post('/api/signup', async (req, res) => {
       return res.status(400).send('Password less than 6 characters');
     }
 
-    const data = {
-      user_id: generateUserId,
-      email: sanitizedEmail,
-      hashed_password: hashedPassword,
-    };
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      bcrypt.hash(password, salt, (err, hash) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        const data = {
+          user_id: generateUserId,
+          email: sanitizedEmail,
+          hashed_password: hash,
+        };
+        users.insertOne(data);
+      });
+    });
 
-    const insertedUser = await users.insertOne(data);
-
-    const token = jwt.sign(insertedUser, sanitizedEmail, {
+    const token = jwt.sign(sanitizedEmail, {
       expiresIn: 60 * 24,
     });
 
