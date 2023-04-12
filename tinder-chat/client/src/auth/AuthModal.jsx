@@ -30,7 +30,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       }
 
       const response = await Axios.post(
-        `${isSignUp ? 'signup' : 'login'}`,
+        `${isSignUp ? '/api/signup' : '/api/login'}`,
         { email, password }
       );
 
