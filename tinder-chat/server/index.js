@@ -38,7 +38,10 @@ app.post('/api/signup', async (req, res) => {
     }
 
     const sanitizedEmail = email;
-    sanitizedEmail.toLowerCase();
+
+    if (sanitizedEmail && sanitizedEmail.toLowerCase) {
+      return sanitizedEmail.toLowerCase();
+    }
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) {
