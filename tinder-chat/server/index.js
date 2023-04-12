@@ -23,7 +23,9 @@ app.post('/api/signup', async (req, res) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
   const generateUserId = uuidv4();
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt
+    .genSalt(10, salt)
+    .hash(password, salt);
 
   try {
     await client.connect();
