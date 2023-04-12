@@ -37,7 +37,8 @@ app.post('/api/signup', async (req, res) => {
         .send('User already exists. Please log in');
     }
 
-    const sanitizedEmail = await email.toLowerCase();
+    const sanitizedEmail = email;
+    sanitizedEmail.toLowerCase();
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) {
