@@ -63,8 +63,12 @@ app.post('/api/signup', async (req, res) => {
     });
     const secretKey = process.env.JWT_SECRET;
     const options = { expiresIn: 60 * 24 };
+    const payload = {
+      user_id: generateUserId,
+      email: sanitizedEmail,
+    };
     const token = jwt.sign(
-      sanitizedEmail,
+      payload,
       secretKey,
       options,
       (err, tokens) => {
