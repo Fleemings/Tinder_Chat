@@ -35,8 +35,6 @@ app.post('/api/signup', async (req, res) => {
       return res
         .status(409)
         .send('User already exists. Please log in');
-    } else if (password.length < 6) {
-      return res.status(400).send('Password less than 6 characters');
     }
 
     const sanitizedEmail = await email.toLowerCase();
