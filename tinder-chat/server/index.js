@@ -23,6 +23,7 @@ app.post('/api/signup', async (req, res) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
   const generateUserId = uuidv4();
+  const sanitizedEmail = email.toLowerCase();
 
   try {
     await client.connect();
@@ -30,7 +31,6 @@ app.post('/api/signup', async (req, res) => {
     const database = client.db('app-data');
     const users = database.collection('users');
     const existingUser = await users.findOne({ email });
-    const sanitizedEmail = email.toLowerCase();
 
     if (existingUser) {
       return res
