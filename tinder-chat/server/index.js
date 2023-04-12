@@ -23,7 +23,6 @@ app.post('/api/signup', async (req, res) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
   const generateUserId = uuidv4();
-  const sanitizedEmail = email.toLowerCase();
 
   try {
     await client.connect();
@@ -39,6 +38,8 @@ app.post('/api/signup', async (req, res) => {
     } else if (password.length < 6) {
       return res.status(400).send('Password less than 6 characters');
     }
+
+    const sanitizedEmail = await email.toLowerCase();
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) {
