@@ -61,11 +61,23 @@ app.post('/api/signup', async (req, res) => {
         users.insertOne(data);
       });
     });
+    const secretKey = process.env.JWT_SECRET;
+    const options = { expiresIn: 60 * 24 };
+    const token = jwt.sign(
+      sanitizedEmail,
+      secretKey,
+      options,
+      (err, tokens) => {
+        if (err) {
+          console.error(err);
+          return res
+            .status(500)
+            .send('An error occurred while signing the token');
+        }
 
-    const token = jwt.sign(sanitizedEmail, {
-      expiresIn: 60 * 24,
-    });
-
+        res.send(tokens);
+      }
+    );
     res.status(201).json({ token, userId: generateUserId });
   } catch (error) {
     console.log(error);
