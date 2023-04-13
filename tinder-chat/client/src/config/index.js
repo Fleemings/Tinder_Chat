@@ -12,7 +12,7 @@ const isLocalhost = Boolean(
 
 const API_URL = isLocalhost
   ? 'http://localhost:8080'
-  : 'http://35.180.109.170:8080';
+  : 'http://35.180.109.170:8080' || 'https://tinderchat.fleemings.pt';
 
 export const Axios = axios.create({
   withCredentials: true,
