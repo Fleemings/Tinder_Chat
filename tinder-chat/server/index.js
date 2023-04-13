@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const helmet = require('helmet');
 require('dotenv').config();
 const config = require('./config/index');
+const path = require('path');
 
 const { port, uri, allowedDomains } = config;
 
@@ -15,12 +16,31 @@ app.use(cors({ origin: allowedDomains, credentials: true }));
 app.use(helmet());
 app.use(express.json());
 
+const _dirname = path.dirname('');
+const buildPath = path.join(_dirname, '../client/build"');
+
+app.use(express.static(buildPath));
+
+app.get('/*', function (req, res) {
+  res.sendFile(
+    path.join(__dirname, '../client/build/index.html'),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+
 app.get('/', (req, res) => {
   res.send('Hello to my app');
 });
 
 app.post('/api/signup', async (req, res) => {
-  const client = new MongoClient(uri);
+  const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   const { email, password } = req.body;
   const generateUserId = uuidv4();
 

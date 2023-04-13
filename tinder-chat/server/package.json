@@ -1,14 +1,6 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "configurations": [
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:8080"
-    }
-  ],
   "description": "",
   "main": "index.js",
   "scripts": {
