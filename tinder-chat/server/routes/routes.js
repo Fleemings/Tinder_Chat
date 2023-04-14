@@ -284,3 +284,5 @@ router.post('/api/message', async (req, res, next) => {
     await client.close();
   }
 });
+
+module.exports = router;
