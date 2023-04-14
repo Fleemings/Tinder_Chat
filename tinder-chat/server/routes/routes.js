@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const uri = process.env.URI;
 
-router.post('/api/signup', async (req, res) => {
+router.post('/api/signup', async (req, res, next) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
   const generateUserId = uuidv4();
@@ -71,6 +71,7 @@ router.post('/api/signup', async (req, res) => {
       }
     );
     res.status(201).json({ token, userId: generateUserId });
+    next();
   } catch (error) {
     console.log(error);
   } finally {
@@ -78,7 +79,7 @@ router.post('/api/signup', async (req, res) => {
   }
 });
 
-router.post('/api/login', async (req, res) => {
+router.post('/api/login', async (req, res, next) => {
   const client = new MongoClient(uri);
   const { email, password } = req.body;
 
@@ -99,6 +100,7 @@ router.post('/api/login', async (req, res) => {
       res.status(201).json({ token, userId: user.user_id });
     } else if (!correctPassword)
       res.status(400).send('Invalid Credentials');
+    next();
   } catch (error) {
     console.log(error);
   } finally {
@@ -106,7 +108,7 @@ router.post('/api/login', async (req, res) => {
   }
 });
 
-router.get('/api/gendered-users', async (req, res) => {
+router.get('/api/gendered-users', async (req, res, next) => {
   const client = new MongoClient(uri);
   const gender = req.query.gender;
   try {
@@ -117,6 +119,7 @@ router.get('/api/gendered-users', async (req, res) => {
     const foundUsers = await users.find(query).toArray();
 
     res.send(foundUsers);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
@@ -124,7 +127,7 @@ router.get('/api/gendered-users', async (req, res) => {
   }
 });
 
-router.put('/api/user', async (req, res) => {
+router.put('/api/user', async (req, res, next) => {
   const client = new MongoClient(uri);
   const formData = req.body.formData;
   try {
@@ -148,6 +151,7 @@ router.put('/api/user', async (req, res) => {
     };
     const insertedUser = await users.updateOne(query, updateDocument);
     res.send(insertedUser);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
@@ -155,7 +159,7 @@ router.put('/api/user', async (req, res) => {
   }
 });
 
-router.get('/api/user', async (req, res) => {
+router.get('/api/user', async (req, res, next) => {
   const client = new MongoClient(uri);
   const userId = req.query.userId;
 
@@ -166,6 +170,7 @@ router.get('/api/user', async (req, res) => {
     const query = { user_id: userId };
     const user = await users.findOne(query);
     res.send(user);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
@@ -173,7 +178,7 @@ router.get('/api/user', async (req, res) => {
   }
 });
 
-router.put('/api/addmatch', async (req, res) => {
+router.put('/api/addmatch', async (req, res, next) => {
   const client = new MongoClient(uri);
   const { userId, matchedUserId } = req.body;
 
@@ -193,6 +198,7 @@ router.put('/api/addmatch', async (req, res) => {
     const user = await users.updateOne(query, updatedDocument);
 
     res.send(user);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
@@ -200,7 +206,7 @@ router.put('/api/addmatch', async (req, res) => {
   }
 });
 
-router.get('/api/users', async (req, res) => {
+router.get('/api/users', async (req, res, next) => {
   const client = new MongoClient(uri);
   const userIds = JSON.parse(req.query.userIds);
 
@@ -226,6 +232,7 @@ router.get('/api/users', async (req, res) => {
     console.log(foundedUsers);
 
     res.send(foundedUsers);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
@@ -233,7 +240,7 @@ router.get('/api/users', async (req, res) => {
   }
 });
 
-router.get('/api/messages', async (req, res) => {
+router.get('/api/messages', async (req, res, next) => {
   const client = new MongoClient(uri);
 
   const userId = req.query.userId;
@@ -251,6 +258,7 @@ router.get('/api/messages', async (req, res) => {
     };
     const foundMessages = await messages.find(query).toArray();
     res.send(foundMessages);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
@@ -258,7 +266,7 @@ router.get('/api/messages', async (req, res) => {
   }
 });
 
-router.post('/api/message', async (req, res) => {
+router.post('/api/message', async (req, res, next) => {
   const client = new MongoClient(uri);
   const message = req.body.message;
 
@@ -269,6 +277,7 @@ router.post('/api/message', async (req, res) => {
 
     const insertedMessage = await messages.insertOne(message);
     res.send(insertedMessage);
+    next();
   } catch (error) {
     console.error(error);
   } finally {
