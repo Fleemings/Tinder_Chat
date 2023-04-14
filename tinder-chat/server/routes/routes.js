@@ -285,4 +285,6 @@ router.post('/api/message', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+module.exports = {
+  endpoint: router,
+};
