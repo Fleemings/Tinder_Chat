@@ -4,9 +4,8 @@ const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('./config/index');
 
-const { uri } = config;
+const uri = process.env.URI;
 
 router.post('/api/signup', async (req, res) => {
   const client = new MongoClient(uri);
