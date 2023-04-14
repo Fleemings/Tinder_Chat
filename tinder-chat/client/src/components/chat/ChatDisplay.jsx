@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Chat from './Chat';
 import './ChatDisplay.css';
 import ChatInput from './ChatInput';
-import { Axios } from '../../config/index';
+import { BACK_SERVER_URL } from '../../config/index';
+import axios from 'axios';
 
 const ChatDisplay = ({ user, clickedUser }) => {
   const userId = user?.user_id;
@@ -15,12 +16,15 @@ const ChatDisplay = ({ user, clickedUser }) => {
 
   const getMessages = async () => {
     try {
-      const response = await Axios.get('/api/messages', {
-        params: {
-          userId: userId,
-          correspondingUserId: clickedUserId,
-        },
-      });
+      const response = await axios.get(
+        `${BACK_SERVER_URL}/api/messages`,
+        {
+          params: {
+            userId: userId,
+            correspondingUserId: clickedUserId,
+          },
+        }
+      );
       setUsersMessages(response.data);
     } catch (error) {
       console.log(error);
@@ -29,12 +33,15 @@ const ChatDisplay = ({ user, clickedUser }) => {
 
   const getClickedUsersMessages = async () => {
     try {
-      const response = await Axios.get('/api/messages', {
-        params: {
-          userId: clickedUserId,
-          correspondingUserId: userId,
-        },
-      });
+      const response = await axios.get(
+        `${BACK_SERVER_URL}/api/messages`,
+        {
+          params: {
+            userId: clickedUserId,
+            correspondingUserId: userId,
+          },
+        }
+      );
       setClickedUserMessages(response.data);
     } catch (error) {
       console.error(error);
@@ -70,8 +77,6 @@ const ChatDisplay = ({ user, clickedUser }) => {
     a.timestamp.localeCompare(b.timestamp)
   );
 
-  console.log('messages ' + messages);
-  console.log('UserMessages ' + usersMessages);
   return (
     <>
       <Chat descendingOrderMessages={descendingOrderMessages} />

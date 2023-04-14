@@ -1,20 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './MatchesDisplay.css';
-import { Axios } from '../../config/index';
-import { useCookies } from 'react-cookie';
+import { BACK_SERVER_URL } from '../../config/index';
+import axios from 'axios';
 
 const MatchesDisplay = ({ matches, setClickedUser }) => {
   const [matchesProfile, setMatchesProfile] = useState(null);
-  const [cookies, setCookies, removeCookies] = useCookies(['user']); // null
 
   const matchedUserIds = matches.map(({ user_id }) => user_id);
 
   const getMatches = async () => {
     try {
-      const response = await Axios.get('/api/users', {
-        params: { userIds: JSON.stringify(matchedUserIds) },
-      });
+      const response = await axios.get(
+        `${BACK_SERVER_URL}/api/users`,
+        {
+          params: { userIds: JSON.stringify(matchedUserIds) },
+        }
+      );
 
       setMatchesProfile(response.data);
     } catch (error) {

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './AuthModal.css';
+import { BACK_SERVER_URL } from '../config/index';
 import axios from 'axios';
-import { Axios } from '../config/index';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { IoClose } from 'react-icons/io5';
@@ -29,17 +29,25 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         return;
       }
 
-      const response = await Axios.post(
-        `${isSignUp ? '/api/signup' : '/api/login'}`,
-        { email, password }
-      );
-
-      setCookies('AuthToken', response.data.token);
-      setCookies('UserId', response.data.userId);
-
-      const sucess = response.status === 201;
-      if (sucess && isSignUp) navigate('/onboarding');
-      if (sucess && !isSignUp) navigate('/dashboard');
+      if (isSignUp) {
+        const response = await axios.post(
+          `${BACK_SERVER_URL}/api/login}`,
+          { email, password }
+        );
+        setCookies('AuthToken', response.data.token);
+        setCookies('UserId', response.data.userId);
+        const sucess = response.status === 200;
+        if (sucess) navigate('/onboarding');
+      } else if (!isSignUp) {
+        const response = await axios.post(
+          `${BACK_SERVER_URL}/api/signup}`,
+          { email, password }
+        );
+        setCookies('AuthToken', response.data.token);
+        setCookies('UserId', response.data.userId);
+        const sucess = response.status === 201;
+        if (sucess) navigate('/dashboard');
+      }
 
       window.location.reload();
     } catch (error) {

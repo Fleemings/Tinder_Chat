@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import './css/Dashboard.css';
 import ChatContainer from '../components/chat/ChatContainer';
-import { Axios } from '../config/index';
+import { BACK_SERVER_URL } from '../config/index';
+import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
 const Dashboard = () => {
@@ -12,15 +13,17 @@ const Dashboard = () => {
   const [cookies, setCookies, removeCookies] = useCookies(['user']);
   const [genderedUsers, setGenderedUsers] = useState(null);
   const [lastDirection, setLastDirection] = useState();
-  const [isLoading, setIsLoading] = useState(true);
 
   const userId = cookies.UserId;
 
   const getUser = async () => {
     try {
-      const response = await Axios.get('/api/user', {
-        params: { userId },
-      });
+      const response = await axios.get(
+        `${BACK_SERVER_URL}/api/user`,
+        {
+          params: { userId },
+        }
+      );
 
       setUser(response.data);
     } catch (error) {
@@ -30,11 +33,14 @@ const Dashboard = () => {
 
   const getGenderedUsers = async () => {
     try {
-      const response = await Axios.get('/api/gendered-users', {
-        params: {
-          gender: user?.gender_interest,
-        },
-      });
+      const response = await axios.get(
+        `${BACK_SERVER_URL}/api/gendered-users`,
+        {
+          params: {
+            gender: user?.gender_interest,
+          },
+        }
+      );
       setGenderedUsers(response.data);
     } catch (error) {
       console.error(error);
@@ -43,23 +49,17 @@ const Dashboard = () => {
 
   useEffect(() => {
     getUser();
-    setIsLoading(false);
   }, []);
 
   useEffect(() => {
     if (user) {
       getGenderedUsers();
-      setIsLoading(false);
     }
   }, [user]);
 
-  if (isLoading) {
-    return <div>loading..</div>;
-  }
-
   const updateMatches = async (matchedUserId) => {
     try {
-      await Axios.put('/api/addmatch', {
+      await axios.put(`${BACK_SERVER_URL}/api/addmatch`, {
         userId,
         matchedUserId,
       });
@@ -75,10 +75,6 @@ const Dashboard = () => {
       updateMatches(swipedUserId);
     }
     setLastDirection(direction);
-  };
-
-  const outOfFrame = (name) => {
-    console.log(`${name} left the screen!`);
   };
 
   const matchedUserIds = user?.matches
@@ -101,9 +97,6 @@ const Dashboard = () => {
                   className='swipe'
                   key={genderedUser.user_id}
                   onSwipe={(dir) => swiped(dir, genderedUser.user_id)}
-                  onCardLeftScreen={() =>
-                    outOfFrame(genderedUser.first_name)
-                  }
                 >
                   <div
                     style={{
