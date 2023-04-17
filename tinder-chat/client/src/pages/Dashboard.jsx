@@ -18,12 +18,9 @@ const Dashboard = () => {
 
   const getUser = async () => {
     try {
-      const response = await axios.get(
-        `${BACK_SERVER_URL}/api/user`,
-        {
-          params: { userId },
-        }
-      );
+      const response = await axios.get(`${BACK_SERVER_URL}/user`, {
+        params: { userId },
+      });
 
       setUser(response.data);
     } catch (error) {
@@ -34,7 +31,7 @@ const Dashboard = () => {
   const getGenderedUsers = async () => {
     try {
       const response = await axios.get(
-        `${BACK_SERVER_URL}/api/gendered-users`,
+        `${BACK_SERVER_URL}/gendered-users`,
         {
           params: {
             gender: user?.gender_interest,
@@ -59,7 +56,7 @@ const Dashboard = () => {
 
   const updateMatches = async (matchedUserId) => {
     try {
-      await axios.put(`${BACK_SERVER_URL}/api/addmatch`, {
+      await axios.put(`${BACK_SERVER_URL}/addmatch`, {
         userId,
         matchedUserId,
       });

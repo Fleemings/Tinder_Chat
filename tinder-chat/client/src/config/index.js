@@ -1,1 +1,1 @@
-export const BACK_SERVER_URL = 'http://35.180.109.170:8080';
+export const BACK_SERVER_URL = 'http://localhost:5000';

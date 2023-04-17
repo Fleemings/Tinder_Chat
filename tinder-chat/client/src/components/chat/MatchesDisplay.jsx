@@ -11,12 +11,9 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
 
   const getMatches = async () => {
     try {
-      const response = await axios.get(
-        `${BACK_SERVER_URL}/api/users`,
-        {
-          params: { userIds: JSON.stringify(matchedUserIds) },
-        }
-      );
+      const response = await axios.get(`${BACK_SERVER_URL}/users`, {
+        params: { userIds: JSON.stringify(matchedUserIds) },
+      });
 
       setMatchesProfile(response.data);
     } catch (error) {

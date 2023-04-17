@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './AuthModal.css';
-import { BACK_SERVER_URL } from '../config/index';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -19,35 +18,29 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const handleClick = () => {
     setShowModal(false);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log('entrando');
     try {
       if (isSignUp && password !== confirmPassword) {
-        setError('Passwords does not match');
+        setError('Passwords needs to match!');
         return;
       }
+      console.log('confirmou 1');
 
-      if (isSignUp) {
-        const response = await axios.post(
-          `${BACK_SERVER_URL}/api/login}`,
-          { email, password }
-        );
-        setCookies('AuthToken', response.data.token);
-        setCookies('UserId', response.data.userId);
-        const sucess = response.status === 200;
-        if (sucess) navigate('/onboarding');
-      } else if (!isSignUp) {
-        const response = await axios.post(
-          `${BACK_SERVER_URL}/api/signup}`,
-          { email, password }
-        );
-        setCookies('AuthToken', response.data.token);
-        setCookies('UserId', response.data.userId);
-        const sucess = response.status === 201;
-        if (sucess) navigate('/dashboard');
-      }
+      const response = await axios.post(
+        `http://localhost:5000/${isSignUp ? 'signup' : 'login'}`,
+        { email, password }
+      );
+      console.log('acessou a rota');
+
+      setCookies('AuthToken', response.data.token);
+      setCookies('UserId', response.data.userId);
+
+      const success = response.status === 201;
+      console.log('entrando');
+      if (success && isSignUp) navigate('/onboarding');
+      if (success && !isSignUp) navigate('/dashboard');
 
       window.location.reload();
     } catch (error) {

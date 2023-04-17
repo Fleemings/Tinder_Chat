@@ -22,7 +22,7 @@ const ChatInput = ({
     };
 
     try {
-      await axios.post(`${BACK_SERVER_URL}/api/message`, { message });
+      await axios.post(`${BACK_SERVER_URL}/message`, { message });
       getMessages();
       getClickedUsersMessages();
       setTextArea('');
