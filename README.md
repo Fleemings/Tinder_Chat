@@ -21,13 +21,11 @@ It is not finished yet some features are still in building process.
 
 ### Screenshot
 
-![](tinder-chat/client/src/images/first-page.png)
+![](tinder-chat/client/src/assets/images/first-page.png)
 
-![](tinder-chat/client/src/images/second-page.png)
+![](tinder-chat/client/src/assets/images/second-page.png) ![](tinder-chat/client/src/assets/images/third-page.png)
 
-![](tinder-chat/client/src/images/third-page.png)
-
-![](tinder-chat/client/src/images/fourth-page.png)
+![](tinder-chat/client/src/assets/images/fourth-page.png)
 
 ## My process
 
@@ -50,7 +48,7 @@ It is not finished yet some features are still in building process.
 
 ### Install dependencies
 
-# Go to
+#### Go to
 
 ```bash
     ./tinder-chat/client
@@ -62,7 +60,7 @@ It is not finished yet some features are still in building process.
    `npm install`
 ```
 
-# Go to
+#### Go to
 
 ```bash
     ./tinder-chat/server
@@ -85,7 +83,7 @@ It is not finished yet some features are still in building process.
 - Create the collections: `users` and `messages`
 - Follow the data model describde bellow:
 
-# users collection
+#### users collection
 
 ```bash
 user_id: id
@@ -104,7 +102,7 @@ url: String
 
 ```
 
-# messages collection
+#### messages collection
 
 ```bash
 timestamp
@@ -130,7 +128,7 @@ message
 
 ### Start project
 
-# Frontend inside the client folder
+#### Frontend inside the client folder
 
 ```bash
    `npm start:frontend`
@@ -138,8 +136,11 @@ message
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-# Backend inside the backend folder
+#### Backend inside the backend folder
 
 ```bash
    `npm start:backend`
 ```
+
+New features and upgrade of the existing ones is coming soon
+
