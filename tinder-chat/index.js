@@ -8,16 +8,16 @@ require('dotenv').config();
 // const path = require('path');
 const bodyParser = require('body-parser');
 const port = process.env.PORT;
-const URI = process.env.URI;
+const URI = process.env.MONGODB_URI;
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello to my app');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello to my app');
+// });
 
 app.post('/signup', async (req, res) => {
   const client = new MongoClient(URI);

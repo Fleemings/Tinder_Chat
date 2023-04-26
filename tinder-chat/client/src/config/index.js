@@ -1,1 +1,1 @@
-export const BACK_SERVER_URL = 'http://localhost:5000';
+export const BACK_SERVER_URL = 'https://tinderchat.herokuapp.com';

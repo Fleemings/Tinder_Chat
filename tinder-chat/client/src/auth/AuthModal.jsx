@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { IoClose } from 'react-icons/io5';
+import { BACK_SERVER_URL } from '../config/index';
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
   const [email, setEmail] = useState(null);
@@ -29,7 +30,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       console.log('confirmou 1');
 
       const response = await axios.post(
-        `http://localhost:5000/${isSignUp ? 'signup' : 'login'}`,
+        `${BACK_SERVER_URL}/${isSignUp ? 'signup' : 'login'}`,
         { email, password }
       );
       console.log('acessou a rota');
@@ -89,7 +90,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         <input
           className='secondary__button'
           type='submit'
-          value='SIGN UP'
+          value={`${isSignUp} ? 'SIGN UP' : 'LOGIN'`}
         />
         <p className='auth-model__error'>{error}</p>
       </form>
