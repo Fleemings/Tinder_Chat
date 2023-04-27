@@ -10,8 +10,8 @@
   font-size: 0.9rem;
   text-transform: uppercase;
   padding: 1rem 1.5rem;
-  border-radius: 3rem;
-  border: 1px solid rgb(121, 119, 119);
+  border-radius: 1.7rem;
+  box-shadow: 1px 1px 93px 12px rgba(0, 0, 0, 0.73);
   margin: 0.7rem;
   color: rgb(121, 119, 119);
 }
@@ -22,6 +22,9 @@
 
 .auth__modal .close__icon {
   float: right;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 .auth__modal p {
@@ -42,8 +45,10 @@
   border-color: rgba(121, 119, 119, 0.42);
 }
 
-.auth-model__error {
+.auth-model__error,
+.auth-error-message {
   color: rgb(255, 0, 0);
+  text-transform: lowercase;
 }
 
 /*    Media Queries (Medium Devices)    */
