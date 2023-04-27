@@ -52,9 +52,10 @@ h2 {
   border-radius: 30px;
   border: 2px solid rgb(121, 119, 119);
   margin: 6px;
+  cursor: pointer;
 }
 
-.secondary-button:hover {
+.secondary__button:hover {
   color: rgb(48, 48, 48);
   border: solid 2px rgb(48, 48, 48);
 }
